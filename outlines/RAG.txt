@@ -1,0 +1,41 @@
+https://github.com/soonhp/bigcontest2024_LLM
+RAG - 검색 (Retrieval): 생성된 키워드를 벡터로 변환하여, 미리 구축해 둔 '리뷰 기반 VectorDB'에서 가장 유사한 리뷰와 장소 정보를 검색
+실시간 정보 조회 (API 연동): 검색된 장소의 최신 정보(영업시간, 정확한 주소 등)를 네이버/카카오 지도 API를 통해 실시간으로 조회
+LLM (답변 생성 - Generation): 2차 LLM(또는 동일 LLM)이 사용자의 원본 질문, VectorDB에서 찾은 리뷰, API로 조회한 최신 장소 정보를 모두 종합하여 자연스러운 추천 답변을 생성
+
+1단계: 데이터 수집 (Data Collection)
+네이버/카카오 지도 API를 활용해 특정 지역(예: 서울 강남구)의 카페, 식당, 관광지 등 장소 목록과 기본 정보(상호명, 주소)를 확보
+	https://apis.map.kakao.com/web/documentation/
+	일단 관광명소(AT4), 숙박(AD5), 음식점(FD6), 카페(CE7)
+	
+	query: {지역명}
+	category_group_code: {code}
+	
+	후처리: address_name: 
+		[서울] -> 서울
+		[인천] -> 인천
+		[경남] -> 경상남도
+		[경북] -> 경상북도
+		
+		...
+	
+	row: address_name, cateogyr_group_code, place_name, + 리뷰 혹은 블로그
+	
+리뷰 크롤링: 확보한 상호명을 검색어로 활용하여 블로그, SNS 등에서 관련 리뷰를 수집(크롤링)
+
+
+2단계: 데이터 전처리 
+정제 (Cleaning)
+분할 (Chunking): 긴 리뷰는 의미 있는 단위(문단 또는 문장)로 잘라줍니다.
+메타데이터 연결: 잘라낸 모든 텍스트 조각(Chunk)에 원본 장소 정보(상호명, 위치 등)가 무엇인지 꼬리표(메타데이터)를 붙여 저장
+	
+	
+
+
+3단계: 텍스트 임베딩 (Text Embedding) 
+Ko-SimCSE: 한국어 문장 임베딩에 뛰어난 성능을 보입니다.
+
+4단계: 벡터 DB 구축 (VectorDB Construction)
+FAISS
+
+
