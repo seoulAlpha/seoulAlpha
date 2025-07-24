@@ -4,24 +4,89 @@ RAG - 검색 (Retrieval): 생성된 키워드를 벡터로 변환하여, 미리 
 LLM (답변 생성 - Generation): 2차 LLM(또는 동일 LLM)이 사용자의 원본 질문, VectorDB에서 찾은 리뷰, API로 조회한 최신 장소 정보를 모두 종합하여 자연스러운 추천 답변을 생성
 
 1단계: 데이터 수집 (Data Collection)
-네이버/카카오 지도 API를 활용해 특정 지역(예: 서울 강남구)의 카페, 식당, 관광지 등 장소 목록과 기본 정보(상호명, 주소)를 확보
-	https://apis.map.kakao.com/web/documentation/
-	일단 관광명소(AT4), 숙박(AD5), 음식점(FD6), 카페(CE7)
-	
-	query: {지역명}
-	category_group_code: {code}
-	
-	후처리: address_name: 
-		[서울] -> 서울
-		[인천] -> 인천
-		[경남] -> 경상남도
-		[경북] -> 경상북도
+	네이버/카카오 지도 API를 활용해 특정 지역(예: 서울 강남구)의 카페, 식당, 관광지 등 장소 목록과 기본 정보(상호명, 주소)를 확보
+		https://apis.map.kakao.com/web/documentation/
+		일단 관광명소(AT4), 숙박(AD5), 음식점(FD6), 카페(CE7)
 		
-		...
-	
-	row: address_name, cateogyr_group_code, place_name, + 리뷰 혹은 블로그
-	
-리뷰 크롤링: 확보한 상호명을 검색어로 활용하여 블로그, SNS 등에서 관련 리뷰를 수집(크롤링)
+		query: {지역명}
+		category_group_code: {code}
+		
+		후처리: address_name: 
+			[서울] -> 서울
+			[인천] -> 인천
+			[경남] -> 경상남도
+			[경북] -> 경상북도
+			
+			...
+		
+		row: address_name, cateogyr_group_code, place_name, + 리뷰 혹은 블로그
+		
+	리뷰 크롤링: 확보한 상호명을 검색어로 활용하여 블로그, SNS 등에서 관련 리뷰를 수집(크롤링)
+
+	코드 설명
+		kakao_crawler.py
+			- 목적: 카카오 API를 활용해 관광명소 데이터를 수집하는 크롤러
+			- 주요 기능:
+			  1. 키워드 기반 장소 검색 (`category_group_code` 필터링 포함)
+			  2. 지역 단위(예: 서울_강남)로 JSON 또는 JSONL 파일 저장
+			  3. API 호출 실패/오류 대비 예외 처리 및 로그 출력
+			  4. 중복 방지를 위한 장소 ID 중복 체크
+			  5. pagination(페이지네이션) 지원 (1~45page, 15건 단위)
+
+			구성 요소:
+			- `requests` 라이브러리 사용
+			- `Authorization` 헤더에 KakaoAK 키 포함
+			- 사용자 입력: 지역명, 카테고리(관광명소), 출력 디렉토리
+			- 저장 형식: JSON / JSONL 선택 가능
+
+			기타:
+			- 잘못된 응답 처리 및 empty 결과 시 패스
+			- 터미널에서 실행할 수 있도록 `__main__` 블록 구성
+
+		comments_process.py
+			- 목적: JSONL 형식으로 저장된 리뷰 데이터를 문장 단위로 분할하고 전처리하여 다시 저장
+			- 주요 기능:
+			  1. 모든 `.jsonl` 파일을 재귀적으로 탐색하여 처리
+			  2. 리뷰 내 텍스트를 문장 단위로 분할 (kiwipiepy 사용)
+			  3. 특수문자 제거, 공백 정리 등 간단한 텍스트 정제 수행
+			  4. 전처리된 문장을 `"processed_sentences"` 키로 추가 저장
+			  5. 결과는 기존 JSONL 파일에 덮어쓰기 방식으로 저장
+
+			구성 요소:
+			- `kiwipiepy.Kiwi`를 활용한 문장 분리
+			- `clean_text()` 함수: 텍스트 정제 (특수문자 제거, 공백 정리 등)
+			- 에러 처리: 폴더 없음, JSON 파싱 오류 등 로그 출력
+
+			실행 방법:
+			- 메인 블록에서 `data/json` 디렉토리 내 모든 JSONL 파일 자동 처리
+			
+		build_faiss_db.py
+			- 목적: 전처리된 장소 정보 데이터를 기반으로 문장 임베딩을 생성하고 FAISS DB로 저장
+			- 주요 기능:
+			  1. 지역(시/도, 시/군/구) 및 카테고리(예: 식당)별 JSONL 데이터를 통합 처리
+			  2. 이름, 요약, 후기 문장을 통합하여 텍스트 임베딩 생성
+			  3. FAISS 인덱스를 생성하여 `.index` 형식으로 저장
+			  4. 메타데이터(JSONL)도 함께 저장하여 후속 질의나 디버깅에 활용 가능
+
+			구성 요소:
+			- `SentenceTransformer`: SBERT 기반 한국어 문장 임베딩
+			- `faiss.IndexFlatL2`: L2 거리 기반 벡터 인덱스 생성
+			- `unidecode`: 경로 및 파일명에서 한글 제거 후 ASCII 변환
+			- 예외 처리 및 존재 여부 확인 포함
+
+			입력:
+			- JSONL 파일: `data/json/도시명_카테고리.jsonl`
+			- `processed_sentences` 키와 `ai_summary` 키가 있는 전처리 완료 데이터
+
+			출력:
+			- FAISS 인덱스 파일: `faiss_integrated_dbs/도_이름_ASCII/faiss_카테고리.index`
+			- 메타데이터: `metadata_카테고리.jsonl`
+
+			실행 방식:
+			- `__main__` 블록에서 ADMIN_AREAS, CATEGORIES에 따라 전체 일괄 처리
+			- 중간 경로가 없을 경우 자동 생성됨
+			
+			
 
 
 2단계: 데이터 전처리 
