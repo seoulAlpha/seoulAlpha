@@ -2,14 +2,14 @@
 {"name": "레저에빠지다", "address": "서울 성동구 성수일로10길 26 907호", "comments": [], "ai_summary": ""}
 {"name": "동양레저상사", "address": "서울 동대문구 장한로5길 73-5", "comments": [], "ai_summary": ""}
 {"name": "동남레저타운", "address": "서울 종로구 창신길 126", "comments": [], "ai_summary": ""}
-{"name": "동방레져스포츠", "address": "서울 종로구 종로36길 13", "comments": ["I needed to buy some hiking items for a 2 day backpacking trip to Seoraksan. Because I am visiting from the USA, I didn't have any hiking gear."], "ai_summary": ""}
+{"name": "동방레져스포츠", "address": "서울 종로구 종로36길 13", "comments": ["I needed to buy some hiking items for a 2 day backpacking trip to Seoraksan. Because I am visiting from the USA, I didn't have any hiking gear."], "ai_summary": "", "processed_sentences": ["I needed to buy some hiking items for a 2 day backpacking trip to Seoraksan Because I am visiting from the USA I didnt have any hiking gear"]}
 {"name": "동남레저타운", "address": "서울 종로구 창신길 126-1", "comments": [], "ai_summary": ""}
-{"name": "코만도레저스포츠", "address": "서울 중구 을지로 지하 218 을지로지하쇼핑몰 442호", "comments": ["사장이 상당히 무례하네요"], "ai_summary": ""}
+{"name": "코만도레저스포츠", "address": "서울 중구 을지로 지하 218 을지로지하쇼핑몰 442호", "comments": ["사장이 상당히 무례하네요"], "ai_summary": "", "processed_sentences": ["사장이 상당히 무례하네요"]}
 {"name": "더트레져", "address": "서울 성북구 고려대로17가길 69", "comments": [], "ai_summary": ""}
 {"name": "양지레저", "address": "서울 종로구 동호로 지하 398", "comments": [], "ai_summary": ""}
 {"name": "동진레저종로점", "address": "서울 종로구 종로 248-1", "comments": [], "ai_summary": ""}
 {"name": "레저인", "address": "서울 종로구 대학로14길 22-3", "comments": [], "ai_summary": ""}
 {"name": "에이치디레저", "address": "서울 광진구 면목로 121", "comments": [], "ai_summary": ""}
-{"name": "서울레저파크 어린이회관 눈썰매장", "address": "서울 광진구 광나루로 441", "comments": ["가이드 분들이 너무 친절하세요\n덕분에 재밌게 놀다 갑니다욤🥹", "하급 중•상급 코스 나누어져 있어서 좋았음 눈놀이 장에서 낮은 썰매도 만족 했음 직원도 친절해서 좋았음 근데 딱 세개만 개선해주면 될듯. 놀이기구가 너무 비쌈.", "집 앞 눈썰매장! 튜브를 타고 뱅글뱅글 돌아내려갈 수도 있고 어른들도 즐길 수 있는 코스도 있어서 재미있음 ¥^^¥", "서울에서 이정도면 나쁘지않아요", "최악이네요", "눈썰매 칸이 나눠져있어 다른사랑과 안 부디쳐요", "전반적으로 가격 대비 만족하고, 화장실 주차장 매점 시설도 어린이회관 내라서 좋습니다.단지 놀이 시설은 조금 비싼편 입니다.", "눈썰매+빙어잡이하기 좋다.", "여기도 다른 서울 지천과는 스케일이 다름"], "ai_summary": ""}
-{"name": "서울레저파크 어린이회관 야외수영장", "address": "서울 광진구 광나루로 441", "comments": ["비오는 날이라 사람이 많지 않아서 좋았습니다.", "아이들과같이즐길수있는 야외수영장 다양한쉼공간 있고 간식도먹을수잏어서좋왔음"], "ai_summary": ""}
+{"name": "서울레저파크 어린이회관 눈썰매장", "address": "서울 광진구 광나루로 441", "comments": ["가이드 분들이 너무 친절하세요\n덕분에 재밌게 놀다 갑니다욤🥹", "하급 중•상급 코스 나누어져 있어서 좋았음 눈놀이 장에서 낮은 썰매도 만족 했음 직원도 친절해서 좋았음 근데 딱 세개만 개선해주면 될듯. 놀이기구가 너무 비쌈.", "집 앞 눈썰매장! 튜브를 타고 뱅글뱅글 돌아내려갈 수도 있고 어른들도 즐길 수 있는 코스도 있어서 재미있음 ¥^^¥", "서울에서 이정도면 나쁘지않아요", "최악이네요", "눈썰매 칸이 나눠져있어 다른사랑과 안 부디쳐요", "전반적으로 가격 대비 만족하고, 화장실 주차장 매점 시설도 어린이회관 내라서 좋습니다.단지 놀이 시설은 조금 비싼편 입니다.", "눈썰매+빙어잡이하기 좋다.", "여기도 다른 서울 지천과는 스케일이 다름"], "ai_summary": "", "processed_sentences": ["가이드 분들이 너무 친절하세요", "덕분에 재밌게 놀다 갑니다욤", "하급 중상급 코스 나누어져 있어서 좋았음", "눈놀이 장에서 낮은 썰매도 만족 했음", "직원도 친절해서 좋았음", "근데 딱 세개만 개선해주면 될듯", "놀이기구가 너무 비쌈", "집 앞 눈썰매장", "튜브를 타고 뱅글뱅글 돌아내려갈 수도 있고 어른들도 즐길 수 있는 코스도 있어서 재미있음", "서울에서 이정도면 나쁘지않아요", "최악이네요", "눈썰매 칸이 나눠져있어 다른사랑과 안 부디쳐요", "전반적으로 가격 대비 만족하고 화장실 주차장 매점 시설도 어린이회관 내라서 좋습니다", "단지 놀이 시설은 조금 비싼편 입니다", "눈썰매빙어잡이하기 좋다", "여기도 다른 서울 지천과는 스케일이 다름"]}
+{"name": "서울레저파크 어린이회관 야외수영장", "address": "서울 광진구 광나루로 441", "comments": ["비오는 날이라 사람이 많지 않아서 좋았습니다.", "아이들과같이즐길수있는 야외수영장 다양한쉼공간 있고 간식도먹을수잏어서좋왔음"], "ai_summary": "", "processed_sentences": ["비오는 날이라 사람이 많지 않아서 좋았습니다", "아이들과같이즐길수있는 야외수영장 다양한쉼공간 있고 간식도먹을수잏어서좋왔음"]}
 {"name": "새서울레저", "address": "서울 강남구 압구정로 154", "comments": [], "ai_summary": ""}

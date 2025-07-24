@@ -11,5 +11,5 @@
 {"name": "부산레저", "address": "부산 중구 중앙대로 21", "comments": [], "ai_summary": ""}
 {"name": "다원레저", "address": "부산 강서구 제도로1092번다길 16", "comments": [], "ai_summary": ""}
 {"name": "비에스우성레저", "address": "부산 영도구 봉래나루로 33", "comments": [], "ai_summary": ""}
-{"name": "부산골프클럽", "address": "부산 남구 우암로 375", "comments": ["넓고 좋아요. 벙커연습장도 있구요", "다 좋은데 너무 비싸유.."], "ai_summary": ""}
+{"name": "부산골프클럽", "address": "부산 남구 우암로 375", "comments": ["넓고 좋아요. 벙커연습장도 있구요", "다 좋은데 너무 비싸유.."], "ai_summary": "", "processed_sentences": ["넓고 좋아요", "벙커연습장도 있구요", "다 좋은데 너무 비싸유"]}
 {"name": "우신종합건설", "address": "부산 동구 조방로 27", "comments": [], "ai_summary": ""}

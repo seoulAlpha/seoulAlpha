@@ -9,7 +9,7 @@
 {"name": "레저스테이션", "address": "서울 마포구 월드컵북로 402 KGIT센터 B128호", "comments": [], "ai_summary": ""}
 {"name": "안국레저", "address": "서울 종로구 율곡로 55 동신빌딩 101호", "comments": [], "ai_summary": ""}
 {"name": "한국관광레저학회", "address": "서울 마포구 모래내로 83 한울빌딩 3층", "comments": [], "ai_summary": ""}
-{"name": "썬셋레저435", "address": "서울 마포구 마포나루길 435 마포인트나루 1층", "comments": ["This will give you great experience.It costs 25 000₩ per boat and 3 people can fit well🔥", "너무 예쁘고 좋았는데 직원분 너무 불친절했어요. 이런 대우는 진짜 처음;", "모터달린 오리배 이제 허벅지 불나지 않게 여유롭게 탈 수 있다. 30분 4인기준 1대당 25,000원!"], "ai_summary": ""}
-{"name": "레저드림스", "address": "서울 마포구 마포나루길 332", "comments": ["주말에는 자리가 없답니다. 예약!"], "ai_summary": ""}
+{"name": "썬셋레저435", "address": "서울 마포구 마포나루길 435 마포인트나루 1층", "comments": ["This will give you great experience.It costs 25 000₩ per boat and 3 people can fit well🔥", "너무 예쁘고 좋았는데 직원분 너무 불친절했어요. 이런 대우는 진짜 처음;", "모터달린 오리배 이제 허벅지 불나지 않게 여유롭게 탈 수 있다. 30분 4인기준 1대당 25,000원!"], "ai_summary": "", "processed_sentences": ["This will give you great experienceIt costs 25 000 per boat and 3 people can fit well", "너무 예쁘고 좋았는데 직원분 너무 불친절했어요", "이런 대우는 진짜 처음", "모터달린 오리배 이제 허벅지 불나지 않게 여유롭게 탈 수 있다", "30분 4인기준 1대당 25000원"]}
+{"name": "레저드림스", "address": "서울 마포구 마포나루길 332", "comments": ["주말에는 자리가 없답니다. 예약!"], "ai_summary": "", "processed_sentences": ["주말에는 자리가 없답니다", "예약"]}
 {"name": "초이스레져컨설팅", "address": "서울 마포구 월드컵북로 402 케이지아이티센터 16층", "comments": [], "ai_summary": ""}
 {"name": "다음레저", "address": "서울 종로구 새문안로3길 36 용비어천가오피스텔 4층 425호", "comments": [], "ai_summary": ""}

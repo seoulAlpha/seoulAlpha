@@ -1,5 +1,5 @@
-{"name": "썬셋레저435", "address": "서울 마포구 마포나루길 435 마포인트나루 1층", "comments": ["This will give you great experience.It costs 25 000₩ per boat and 3 people can fit well🔥", "너무 예쁘고 좋았는데 직원분 너무 불친절했어요. 이런 대우는 진짜 처음;", "모터달린 오리배 이제 허벅지 불나지 않게 여유롭게 탈 수 있다. 30분 4인기준 1대당 25,000원!"], "ai_summary": ""}
-{"name": "레저드림스", "address": "서울 마포구 마포나루길 332", "comments": ["주말에는 자리가 없답니다. 예약!"], "ai_summary": ""}
+{"name": "썬셋레저435", "address": "서울 마포구 마포나루길 435 마포인트나루 1층", "comments": ["This will give you great experience.It costs 25 000₩ per boat and 3 people can fit well🔥", "너무 예쁘고 좋았는데 직원분 너무 불친절했어요. 이런 대우는 진짜 처음;", "모터달린 오리배 이제 허벅지 불나지 않게 여유롭게 탈 수 있다. 30분 4인기준 1대당 25,000원!"], "ai_summary": "", "processed_sentences": ["This will give you great experienceIt costs 25 000 per boat and 3 people can fit well", "너무 예쁘고 좋았는데 직원분 너무 불친절했어요", "이런 대우는 진짜 처음", "모터달린 오리배 이제 허벅지 불나지 않게 여유롭게 탈 수 있다", "30분 4인기준 1대당 25000원"]}
+{"name": "레저드림스", "address": "서울 마포구 마포나루길 332", "comments": ["주말에는 자리가 없답니다. 예약!"], "ai_summary": "", "processed_sentences": ["주말에는 자리가 없답니다", "예약"]}
 {"name": "레저메카", "address": "서울 마포구 광성로6길 72", "comments": [], "ai_summary": ""}
 {"name": "레저스테이션", "address": "서울 마포구 월드컵북로 402 KGIT센터 B128호", "comments": [], "ai_summary": ""}
 {"name": "레저신문", "address": "서울 마포구 마포대로14길 19-1 그랜드빌딩 4층", "comments": [], "ai_summary": ""}
@@ -11,5 +11,5 @@
 {"name": "(주)녹색관광레저", "address": "서울 마포구 신촌로 196-1", "comments": [], "ai_summary": ""}
 {"name": "원트레져", "address": "서울 마포구 백범로 18 미화빌딩 2층", "comments": [], "ai_summary": ""}
 {"name": "초이스레져컨설팅", "address": "서울 마포구 월드컵북로 402 케이지아이티센터 16층", "comments": [], "ai_summary": ""}
-{"name": "리버밸리레져", "address": "서울 마포구 월드컵로 37 웰빙센터 3층 302호", "comments": ["전화번호가 일치하지 않네요"], "ai_summary": ""}
+{"name": "리버밸리레져", "address": "서울 마포구 월드컵로 37 웰빙센터 3층 302호", "comments": ["전화번호가 일치하지 않네요"], "ai_summary": "", "processed_sentences": ["전화번호가 일치하지 않네요"]}
 {"name": "스카이원레져", "address": "서울 서대문구 모래내로 151 디엠씨엘가 213호", "comments": [], "ai_summary": ""}

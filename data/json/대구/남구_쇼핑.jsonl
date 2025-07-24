@@ -1,10 +1,10 @@
 {"name": "명성쇼핑백", "address": "대구 남구 현충로 129", "comments": [], "ai_summary": ""}
 {"name": "쇼핑코스", "address": "대구 남구 두류공원로5길 30", "comments": [], "ai_summary": ""}
-{"name": "미리내쇼핑", "address": "대구 남구 효성로 15", "comments": ["유럽1위 브랜드인 상업용 세탁장비 제조사 GIRBAU의 명품세탁기계를 만날수 있어요."], "ai_summary": ""}
+{"name": "미리내쇼핑", "address": "대구 남구 효성로 15", "comments": ["유럽1위 브랜드인 상업용 세탁장비 제조사 GIRBAU의 명품세탁기계를 만날수 있어요."], "ai_summary": "", "processed_sentences": ["유럽1위 브랜드인 상업용 세탁장비 제조사 GIRBAU의 명품세탁기계를 만날수 있어요"]}
 {"name": "빈스쇼핑", "address": "대구 수성구 명덕로76길 118-16", "comments": [], "ai_summary": ""}
 {"name": "지니쇼핑", "address": "대구 수성구 명덕로76길 74", "comments": [], "ai_summary": ""}
 {"name": "쇼핑센타", "address": "대구 중구 명륜로 70 문아파트1지구", "comments": [], "ai_summary": ""}
-{"name": "동아쇼핑귀금속 A코너", "address": "대구 중구 달구벌대로 2085 1층", "comments": ["정직한 가격 예쁜 디자인 반지 목걸이 등 제품이 많습니다", "Rex diamond 결혼 20주년 기념반지 제작  정말 예쁘요 쵝오~!!"], "ai_summary": ""}
+{"name": "동아쇼핑귀금속 A코너", "address": "대구 중구 달구벌대로 2085 1층", "comments": ["정직한 가격 예쁜 디자인 반지 목걸이 등 제품이 많습니다", "Rex diamond 결혼 20주년 기념반지 제작  정말 예쁘요 쵝오~!!"], "ai_summary": "", "processed_sentences": ["정직한 가격 예쁜 디자인 반지 목걸이 등 제품이 많습니다", "Rex diamond 결혼 20주년 기념반지 제작 정말 예쁘요 쵝오"]}
 {"name": "토토쇼핑백", "address": "대구 중구 명륜로12길 33-10", "comments": [], "ai_summary": ""}
 {"name": "동아쇼핑시계부", "address": "대구 중구 달구벌대로 2085", "comments": [], "ai_summary": ""}
 {"name": "더쇼핑", "address": "대구 수성구 신천동로 420", "comments": [], "ai_summary": ""}

@@ -11,5 +11,5 @@
 {"name": "쇼핑빽", "address": "대구 동구 평화로 76-16", "comments": [], "ai_summary": ""}
 {"name": "신나는쇼핑", "address": "대구 동구 동촌로 227", "comments": [], "ai_summary": ""}
 {"name": "제이에이치홀쇼핑", "address": "대구 수성구 화랑로 92", "comments": [], "ai_summary": ""}
-{"name": "신나는쇼핑", "address": "대구 북구 동북로 218", "comments": ["여기서 사람들 많이 타네"], "ai_summary": ""}
+{"name": "신나는쇼핑", "address": "대구 북구 동북로 218", "comments": ["여기서 사람들 많이 타네"], "ai_summary": "", "processed_sentences": ["여기서 사람들 많이 타네"]}
 {"name": "성우쇼핑", "address": "대구 북구 동북로 166-2", "comments": [], "ai_summary": ""}

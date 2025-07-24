@@ -4,7 +4,7 @@
 {"name": "레저인", "address": "서울 종로구 대학로14길 22-3", "comments": [], "ai_summary": ""}
 {"name": "잔디로레저사업부", "address": "서울 종로구 비봉2길 15-2", "comments": [], "ai_summary": ""}
 {"name": "다음레저", "address": "서울 종로구 새문안로3길 36 용비어천가오피스텔 4층 425호", "comments": [], "ai_summary": ""}
-{"name": "동방레져스포츠", "address": "서울 종로구 종로36길 13", "comments": ["I needed to buy some hiking items for a 2 day backpacking trip to Seoraksan. Because I am visiting from the USA, I didn't have any hiking gear."], "ai_summary": ""}
+{"name": "동방레져스포츠", "address": "서울 종로구 종로36길 13", "comments": ["I needed to buy some hiking items for a 2 day backpacking trip to Seoraksan. Because I am visiting from the USA, I didn't have any hiking gear."], "ai_summary": "", "processed_sentences": ["I needed to buy some hiking items for a 2 day backpacking trip to Seoraksan Because I am visiting from the USA I didnt have any hiking gear"]}
 {"name": "제스트레저", "address": "서울 종로구 평창8길 36-6", "comments": [], "ai_summary": ""}
 {"name": "양지레저", "address": "서울 종로구 동호로 지하 398", "comments": [], "ai_summary": ""}
 {"name": "동남레저타운", "address": "서울 종로구 창신길 126-1", "comments": [], "ai_summary": ""}

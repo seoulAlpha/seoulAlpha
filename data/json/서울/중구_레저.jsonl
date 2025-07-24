@@ -1,8 +1,8 @@
 {"name": "자유레저산업", "address": "서울 중구 남대문로 117 동아빌딩 6층", "comments": [], "ai_summary": ""}
-{"name": "코만도레저스포츠", "address": "서울 중구 을지로 지하 218 을지로지하쇼핑몰 442호", "comments": ["사장이 상당히 무례하네요"], "ai_summary": ""}
+{"name": "코만도레저스포츠", "address": "서울 중구 을지로 지하 218 을지로지하쇼핑몰 442호", "comments": ["사장이 상당히 무례하네요"], "ai_summary": "", "processed_sentences": ["사장이 상당히 무례하네요"]}
 {"name": "하나레저서비스", "address": "서울 중구 서소문로 101 902호", "comments": [], "ai_summary": ""}
 {"name": "여행레저티브이(주)", "address": "서울 중구 세종대로 74", "comments": [], "ai_summary": ""}
-{"name": "동방레져스포츠", "address": "서울 종로구 종로36길 13", "comments": ["I needed to buy some hiking items for a 2 day backpacking trip to Seoraksan. Because I am visiting from the USA, I didn't have any hiking gear."], "ai_summary": ""}
+{"name": "동방레져스포츠", "address": "서울 종로구 종로36길 13", "comments": ["I needed to buy some hiking items for a 2 day backpacking trip to Seoraksan. Because I am visiting from the USA, I didn't have any hiking gear."], "ai_summary": "", "processed_sentences": ["I needed to buy some hiking items for a 2 day backpacking trip to Seoraksan Because I am visiting from the USA I didnt have any hiking gear"]}
 {"name": "양지레저", "address": "서울 종로구 동호로 지하 398", "comments": [], "ai_summary": ""}
 {"name": "더트래블앤드레저", "address": "서울 종로구 종로 112-1 3층 6호", "comments": [], "ai_summary": ""}
 {"name": "동진레저종로점", "address": "서울 종로구 종로 248-1", "comments": [], "ai_summary": ""}
