@@ -2,6 +2,13 @@ import subprocess
 import sys
 import os
 import json
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+# 환경 변수 사용
+USER_KEY = os.getenv("API_KEY")
 
 # 설치가 필요한 라이브러리 없는 경우 자동 설치
 def install_required_packages(package, import_name=None):
@@ -39,7 +46,7 @@ import pandas as pd
 import numpy as np
 
 # OpenAI API 키 설정
-USER_KEY = ""
+#USER_KEY = ""
 client = OpenAI(api_key=USER_KEY)
 
 # 데이터 준비
