@@ -1,0 +1,86 @@
+Based on the user's sentence, extract the following variables and return them in the specified JSON format.  
+If a value is not explicitly stated or cannot be inferred, assign it as `null`.  
+Make sure to return only the JSON object, without any comments, explanations, or extra text.  
+The key names and order in the JSON output must be preserved as below.
+
+You may assume that the user's input may be in any language (Korean, English, Japanese, etc.).  
+Respond appropriately by interpreting the input regardless of its language.
+
+[Expected JSON format]
+{
+  "country": (int),
+  "gender": (int),
+  "age": (int),
+  "revisit_indicator": (int),
+  "visit_local_indicator": (int),
+  "planned_activity": (int),
+  "stay_duration": (int),
+  "accommodation_percent": (float),
+  "food_percent": (float),
+  "shopping_percent": (float),
+  "food": (int),
+  "landscape": (int),
+  "heritage": (int),
+  "language": (int),
+  "safety": (int),
+  "budget": (int),
+  "accommodation": (int),
+  "transport": (int),
+  "navigation": (int)
+}
+
+[Mapping rules]
+
+gender:
+- "male", "man", "남성", "남자" = 1
+- "female", "woman", "여성", "여자" = 2
+
+age group:
+- "10s", "10대" = 1
+- "20s", "20대" = 2
+- "30s", "30대" = 3
+- "40s", "40대" = 4
+- "50s", "50대" = 5
+- "60s or older", "60대", "70대" = 6
+
+country region:
+- East Asia (China, Japan, Taiwan, etc.) = 1
+- Southeast Asia (Thailand, Vietnam, Singapore, etc.) = 2
+- Middle East and India = 3
+- English-speaking (USA, UK, etc.) = 4
+- Europe (France, Germany, etc.) = 5
+- Others = 99
+
+revisit_indicator:
+- Any phrase indicating re-visit (e.g., "came again", "visited again", "second visit", "return") = 1
+- First-time visit (e.g., "first time", "never been before") = 0
+
+visit_local_indicator:
+- Mention of non-Seoul locations (e.g., "visited Busan", "went to Jeju", "outside Seoul") = 1
+- Only Seoul (e.g., "only visited Seoul", "did not leave Seoul") = 0
+
+planned_activity:
+- K-pop, fan meetings, concerts = 1  
+- Nature, heritage, traditional culture, landscape = 2  
+- Food, restaurants, local cuisine = 3  
+- Shopping, duty-free = 4  
+- Sports, leisure = 5  
+- Medical, beauty, wellness = 6  
+- Nightlife, amusement parks = 7  
+- Trendy, modern culture = 8  
+- Other = 99
+
+stay_duration:
+- Any explicit mention of stay duration such as “3 days”, “4 nights 5 days”, etc. = extract as integer (in days)
+
+accommodation_percent / food_percent / shopping_percent:
+- If described (e.g., "half of my spending was for shopping"), estimate a percentage (0–100). Otherwise set to null.
+
+Satisfaction scores (1–5) for:
+- food, landscape, heritage, language, safety, budget, accommodation, transport, navigation  
+  → Map as:
+    - “very satisfied” = 5
+    - “satisfied”, “mostly satisfied” = 4
+    - “neutral”, “average” = 3
+    - “dissatisfied”, “somewhat dissatisfied” = 2
+    - “very dissatisfied” = 1
