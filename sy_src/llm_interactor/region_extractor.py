@@ -55,12 +55,12 @@ def extract_region_from_query(user_query):
         
         # 'regions' 키가 있고, 그 값이 리스트인지 확인
         if 'regions' in result and isinstance(result['regions'], list):
-            print(f"[LLM] 추출된 지역 키워드: {result['regions']}")
+            #print(f"[LLM] 추출된 지역 키워드: {result['regions']}")
             return result['regions']
         else:
-            print("[LLM] 'regions' 키를 찾지 못했거나 형식이 리스트가 아닙니다.")
+            #print("[LLM] 'regions' 키를 찾지 못했거나 형식이 리스트가 아닙니다.")
             return []
             
     except Exception as e:
-        print(f"[LLM] 지역명 추출 중 오류 발생: {e}")
+        #print(f"[LLM] 지역명 추출 중 오류 발생: {e}")
         return []
