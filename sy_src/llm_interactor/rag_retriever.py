@@ -120,7 +120,7 @@ def get_rag_recommendation(search_query, region_keywords):
         
     # 1. 장소 검색
     print("\n[RAG] 의미적으로 유사한 장소를 검색합니다...")
-    top_places = _retrieve_places(search_query, k=30)
+    top_places = _retrieve_places(search_query, k=100)
     
     if not top_places:
         return "관련된 장소를 찾지 못했습니다."
@@ -134,6 +134,8 @@ def get_rag_recommendation(search_query, region_keywords):
             address = place.get('address', '')
             if any(keyword in address for keyword in region_keywords):
                 filtered_places.append(place)
+
+            if len(filtered_places) >= 10: break    
         
         print(f"[RAG] 필터링 후 남은 장소: {[p.get('name') for p in filtered_places]}")
     else:
