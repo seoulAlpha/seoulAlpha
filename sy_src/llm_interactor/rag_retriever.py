@@ -148,6 +148,6 @@ def get_rag_recommendation(search_query, region_keywords):
 
     # 3. LLM으로 답변 생성
     print("[RAG] 필터링된 정보를 바탕으로 최종 답변을 생성합니다...")
-    final_answer = _generate_answer_with_llm(search_query, filtered_places)
-    
+    #final_answer = _generate_answer_with_llm(search_query, filtered_places)
+    final_answer = ""
     return final_answer

@@ -1,8 +1,8 @@
 from langdetect import detect
 from deep_translator import GoogleTranslator
 from cluster_predictor import get_user_cluster
-from region_extractor_sy import update_region_keywords
-from rag_retriever_sy import get_rag_recommendation
+from region_extractor import update_region_keywords
+from rag_retriever import get_rag_recommendation
 from query_detector import classify_recommendation_intent
 
 # --- 언어 코드 매핑 ---

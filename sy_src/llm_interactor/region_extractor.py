@@ -64,3 +64,14 @@ def extract_region_from_query(user_query):
     except Exception as e:
         #print(f"[LLM] 지역명 추출 중 오류 발생: {e}")
         return []
+
+def update_region_keywords(query, state):
+    prev_regions = state.get("region_keywords", [])
+    new_regions = extract_region_from_query(query)
+
+    if new_regions:
+        # 새 지역이 발견되면 업데이트
+        if set(new_regions) != set(prev_regions):
+            state["region_keywords"] = new_regions
+    # 새 지역이 없으면 그대로 유지
+    return state

@@ -9,3 +9,8 @@ syenv/
 sy_src/llm_interactor/__pycache__/
 
 *.pyc
+
+__pycache__/
+.vscode/
+.gradio/
+
