@@ -48,7 +48,7 @@ def query_llm_for_variables(user_query, use_prompt=True, use_fewshot=True):
             prompt_parts.append(custom_prompt)
 
     if use_fewshot:
-        with open("data/prompt/custom_few_shot_learning_multi_language.txt", "r", encoding="utf-8") as f:
+        with open("data/prompt/custom_few_shot_learning.txt", "r", encoding="utf-8") as f:
             few_shot_examples = f.read()
             prompt_parts.append(few_shot_examples)
         
