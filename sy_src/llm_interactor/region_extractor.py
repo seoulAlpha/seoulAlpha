@@ -14,7 +14,7 @@ okt = Okt()
 file_path = "./data/korean_regions.txt"
 with open(file_path, 'r', encoding='utf-8') as f:
     regions = [line.strip() for line in f if line.strip()]
-    print(regions)
+
 def extract_region_from_query(user_query, simple=True):
     """
     사용자 질문에서 LLM을 사용해 지역명 키워드 리스트를 추출합니다.
