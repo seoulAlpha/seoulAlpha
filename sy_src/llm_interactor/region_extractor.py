@@ -3,12 +3,12 @@ import random
 from openai import OpenAI
 import os
 import json
-from konlpy.tag import Okt
+from kiwipiepy import Kiwi
 
 # --- 초기 설정 ---
 load_dotenv()
 client = OpenAI(api_key=os.getenv("API_KEY"))
-okt = Okt()
+kiwi = Kiwi()
 
 # 지역 이름 불러오기
 file_path = "./data/korean_regions.txt"
@@ -34,7 +34,8 @@ def extract_region_from_query(user_query, simple=True):
         if "충청도" in user_query:
             found_regions.update(["충북", "충남", "대전", "세종"])
         
-        query_nouns = [word for word, tag in okt.pos(user_query) if tag in ['Noun', 'ProperNoun']]
+        query_nouns = [token.form for token in kiwi.tokenize(user_query) 
+            if token.tag in ['NNG', 'NNP']]
         print(query_nouns)
         for region in regions:
             if region in query_nouns:
