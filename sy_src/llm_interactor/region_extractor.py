@@ -107,7 +107,7 @@ def format_regions_to_dict(region_list):
 
 def update_region_keywords(query, state):
     prev_regions = state.get("region_keywords", [])
-    new_regions = extract_region_from_query(query, simple=True)
+    new_regions = extract_region_from_query(query)
     if new_regions:
     # 새 지역이 발견되면 업데이트
         if set(new_regions) != set(prev_regions):

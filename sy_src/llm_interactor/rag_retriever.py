@@ -98,9 +98,9 @@ def _retrieve_places(query, k, region_list=None):
     쿼리를 기반으로 '지정된 지역 내에서' 유사한 장소를 효율적으로 검색합니다.
     """
     # 1. meta_map에서 검색 대상이 될 벡터 ID 목록 필터링
-    region_list = [ {"region_l1": "전북특별자치도", "region_l2": ""}
-                   , {"region_l1": "광주광역시", "region_l2": ""}
-                   , {"region_l1": "전라남도", "region_l2": ""} ]
+    #region_list = [ {"region_l1": "전북특별자치도", "region_l2": ""}
+    #               , {"region_l1": "광주광역시", "region_l2": ""}
+    #               , {"region_l1": "전라남도", "region_l2": ""} ]
     
     # search_space는 이제 데이터 자체가 아닌, 검색 대상이 될 'ID의 리스트'가 되어야 합니다.
     # filter_by_regions가 해당 지역에 속하는 벡터의 ID(인덱스) 리스트를 반환한다고 가정합니다.
@@ -186,7 +186,7 @@ def get_rag_recommendation(search_query, region_keywords):
         
     # 1. 장소 검색
     print("\n[RAG] 의미적으로 유사한 장소를 검색합니다...")
-    top_places = _retrieve_places(search_query, k=5)
+    top_places = _retrieve_places(search_query, k=5, region_list = region_keywords)
     
     if not top_places:
         return "관련된 장소를 찾지 못했습니다."
