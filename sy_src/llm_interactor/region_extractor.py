@@ -10,93 +10,106 @@ load_dotenv()
 client = OpenAI(api_key=os.getenv("API_KEY"))
 kiwi = Kiwi()
 
-# 지역 이름 불러오기
-file_path = "./data/korean_regions.json"
-with open(file_path, 'r', encoding='utf-8') as f:
-    regions = json.load(f)
-
-# 예외 매핑 룰
-except_mapping_rules = {
-    "전라도": {"전북", "전남", "광주"},
-    "경상도": {"경북", "경남", "부산", "대구", "울산"},
-    "충청도": {"충북", "충남", "대전", "세종"},
-    "수도권": {"경기", "인천"},
-    "서울 근교": {"경기", "인천"},
-    "경기도": {"경기", "인천"}
+EXCEPT_RULE_MAP = {
+    "전라도": ["전북특별자치도", "전라남도", "광주광역시"],
+    "경상도": ["경상북도", "경상남도", "부산광역시", "대구광역시", "울산광역시"],
+    "충청도": ["충청북도", "충청남도", "대전광역시", "세종특별자치시"],
+    "수도권": ["경기도", "인천광역시"],
+    "서울 근교": ["경기도", "인천광역시"],
+    "경기도": ["경기도", "인천광역시"]
 }
 
-def extract_region_from_query(user_query, simple=True):
+PROVINCE_DISTRICT_MAP = {
+    "서울특별시": ["강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"],
+    "부산광역시": ["강서구", "금정구", "기장군", "남구", "동구", "동래구", "부산진구", "북구", "사상구", "사하구", "서구", "수영구", "연제구", "영도구", "중구", "해운대구"],
+    "대구광역시": ["군위군", "남구", "달서구", "달성군", "동구", "북구", "서구", "수성구", "중구"],
+    "인천광역시": ["강화군", "계양구", "남동구", "동구", "미추홀구", "부평구", "서구", "연수구", "옹진군", "중구"],
+    "광주광역시": ["광산구", "남구", "동구", "북구", "서구"],
+    "대전광역시": ["대덕구", "동구", "서구", "유성구", "중구"],
+    "울산광역시": ["남구", "동구", "북구", "울주군", "중구"],
+    "세종특별자치시": [], 
+    "경기도": ["수원시", "용인시", "고양시", "성남시", "화성시", "부천시", "남양주시", "안산시", "평택시", "안양시", "시흥시", "파주시", "김포시", "의정부시", "광주시", "하남시", "오산시", "이천시", "안성시", "의왕시", "양주시", "구리시", "포천시", "동두천시", "과천시", "여주시", "양평군", "가평군", "연천군"],
+    "강원특별자치도": ["춘천시", "원주시", "강릉시", "동해시", "태백시", "속초시", "삼척시", "홍천군", "횡성군", "영월군", "평창군", "정선군", "철원군", "화천군", "양구군", "인제군", "고성군", "양양군"],
+    "충청북도": ["청주시", "충주시", "제천시", "보은군", "옥천군", "영동군", "증평군", "진천군", "괴산군", "음성군", "단양군"],
+    "충청남도": ["천안시", "공주시", "보령시", "아산시", "서산시", "논산시", "계룡시", "당진시", "금산군", "부여군", "서천군", "청양군", "홍성군", "예산군", "태안군"],
+    "전북특별자치도": ["전주시", "익산시", "군산시", "정읍시", "남원시", "김제시", "완주군", "진안군", "무주군", "장수군", "임실군", "순창군", "고창군", "부안군"],
+    "전라남도": ["목포시", "여수시", "순천시", "나주시", "광양시", "담양군", "곡성군", "구례군", "고흥군", "보성군", "화순군", "장흥군", "강진군", "해남군", "영암군", "무안군", "함평군", "영광군", "장성군", "완도군", "진도군", "신안군"],
+    "경상북도": ["포항시", "경주시", "김천시", "안동시", "구미시", "영주시", "영천시", "상주시", "문경시", "경산시", "의성군", "청송군", "영양군", "영덕군", "청도군", "고령군", "성주군", "칠곡군", "예천군", "봉화군", "울진군", "울릉군"],
+    "경상남도": ["창원시", "진주시", "통영시", "사천시", "김해시", "밀양시", "거제시", "양산시", "의령군", "함안군", "창녕군", "고성군", "남해군", "하동군", "산청군", "함양군", "거창군", "합천군"],
+    "제주특별자치도": ["제주시", "서귀포시"]
+}
+
+SHORT_TO_FULL_PROVINCE_NAME = {
+    "서울": "서울특별시", "부산": "부산광역시", "대구": "대구광역시",
+    "인천": "인천광역시", "광주": "광주광역시", "대전": "대전광역시",
+    "울산": "울산광역시", "세종": "세종특별자치시", "경기": "경기도",
+    "강원": "강원특별자치도", "충북": "충청북도", "충남": "충청남도",
+    "전북": "전북특별자치도", "전남": "전라남도", "경북": "경상북도",
+    "경남": "경상남도", "제주": "제주특별자치도"
+}
+
+# 1-3. 시/군/구 이름으로 시/도를 빠르게 찾기 위한 역방향 맵 (코드 실행 시 자동으로 생성됨)
+DISTRICT_TO_PROVINCE_MAP = {
+    district: province
+    for province, districts in PROVINCE_DISTRICT_MAP.items()
+    for district in districts
+}
+
+ALL_KNOWN_REGIONS = set(PROVINCE_DISTRICT_MAP.keys()) | set(DISTRICT_TO_PROVINCE_MAP.keys())
+
+def extract_region_from_query(user_query):
     """
-    사용자 질문에서 LLM을 사용해 지역명 키워드 리스트를 추출합니다.
+    사용자 쿼리에서 지역 정보를 추출합니다.
     """
-    if simple:
-        print("[Keyword] 사용자 쿼리에서 지역명 키워드를 추출합니다...")        
-        query_nouns = [token.form for token in kiwi.tokenize(user_query) 
-            if token.tag in ['NNG', 'NNP']]
-        print(query_nouns)
-        specific_regions = {region for region in regions if region in query_nouns}
-
-        # 2. '전라도', '경상도' 등 광역 키워드로 인해 추가될 대분류 지역을 찾습니다.
-        potential_broad_regions = set()
-        for broad_keyword, provinces in except_mapping_rules.items():
-            if broad_keyword in user_query:
-                potential_broad_regions.update(provinces)
-
-        # 3. 추출된 소분류 지역이 어떤 대분류에 속하는지 확인하여, 제외할 대분류를 결정합니다.
-        broad_regions_to_discard = set()
-        for region in specific_regions:
-            province = regions.get(region) # ex: '순천' -> '전남'
-            if not province:
-                continue
-
-            # 이 소분류(region)가 속한 대분류(province)가 광역 키워드로 인해 추가될 예정이었다면,
-            # 해당 광역 키워드에 해당하는 모든 대분류를 제외 목록에 추가합니다.
-            for broad_keyword, provinces_in_map in except_mapping_rules.items():
-                if province in provinces_in_map and broad_keyword in user_query:
-                    broad_regions_to_discard.update(provinces_in_map)
-                    
-        # 4. 최종 결과를 조합합니다.
-        # (추출된 모든 지역 + 광역 키워드 지역) - 제외할 광역 지역
-        final_regions = (specific_regions.union(potential_broad_regions)) - broad_regions_to_discard
-        
-        return list(final_regions)
+    print("[Keyword] 사용자 쿼리에서 지역명 키워드를 추출합니다...")
+    query_nouns = {token.form for token in kiwi.tokenize(user_query) if token.tag in ['NNG', 'NNP']}
     
+    found_regions = set()
+    for noun in query_nouns:  
+        for known_region in ALL_KNOWN_REGIONS:
+            if noun in known_region:
+                found_regions.add(known_region)
+
+    specific_regions_found = list(found_regions)
+    # 구체적인 지역 명사가 있으면 상세 분석
+    if specific_regions_found:
+        return format_regions_to_dict(specific_regions_found)
+    
+    # 구체적인 지역 명사가 없으면 포괄적인 키워드 검색
     else:
-        print("[LLM] 사용자 쿼리에서 지역명 키워드를 추출합니다...")
-        system_prompt = """
-        당신은 사용자의 여행 관련 질문에서 '대한민국 행정구역' 키워드를 추출하는 AI 어시턴트입니다.
-        사용자의 질문을 분석하여, 주소 필터링에 사용할 수 있는 키워드 목록을 JSON 형식으로 반환해 주세요.
-        결과는 반드시 {"regions": ["키워드1", "키워드2", ...]} 형태여야 합니다.
-        - "전라도"는 "전북", "전남", "광주"로 해석합니다.
-        - "경상도"는 "경북", "경남", "부산", "대구", "울산"으로 해석합니다.
-        - "충청도"는 "충북", "충남", "대전", "세종"으로 해석합니다.
-        - "서울 근교"는 "경기", "인천"으로 해석합니다.
-        - 언급된 지역이 없으면 빈 리스트 []를 반환합니다.
-        """
-        messages = [{"role": "system", "content": system_prompt}, {"role": "user", "content": user_query}]
-        
-        try:
-            response = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=messages,
-                response_format={"type": "json_object"}
-            )
-            result = json.loads(response.choices[0].message.content)
-            
-            if 'regions' in result and isinstance(result['regions'], list):
-                return result['regions']
-            else:
-                return []
-        except Exception as e:
-            print(f"[LLM] 지역명 추출 중 오류 발생: {e}")
-            return []
+        print("-> 구체적인 지역이 없어 포괄 키워드를 검색합니다.")
+        for keyword, provinces in EXCEPT_RULE_MAP.items():
+            if keyword in user_query:
+                print(provinces, specific_regions_found)
+                return provinces
+    
+    # 아무것도 찾지 못했을 경우
+    return None
+
+def format_regions_to_dict(region_list):
+    province = None
+    district = None
+    for region in region_list:
+        if region.endswith(('구', '시', '군')):
+            if region in DISTRICT_TO_PROVINCE_MAP:
+                district = region
+                province = DISTRICT_TO_PROVINCE_MAP[region]
+        full_name = SHORT_TO_FULL_PROVINCE_NAME.get(region)
+        if full_name and full_name in PROVINCE_DISTRICT_MAP:
+            if province is None:
+                province = full_name
+    result_dict = {}
+    if province:
+        result_dict["region_l1"] = province
+    if district:
+        result_dict["region_l2"] = district
+    return result_dict
 
 def update_region_keywords(query, state):
     prev_regions = state.get("region_keywords", [])
     new_regions = extract_region_from_query(query, simple=True)
-
     if new_regions:
-        # 새 지역이 발견되면 업데이트
+    # 새 지역이 발견되면 업데이트
         if set(new_regions) != set(prev_regions):
             state["region_keywords"] = new_regions
     # 새 지역이 없으면 그대로 유지
