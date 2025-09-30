@@ -73,20 +73,17 @@ def extract_region_from_query(user_query):
     specific_regions_found = list(found_regions)
     # 구체적인 지역 명사가 있으면 상세 분석
     if specific_regions_found:
-        return format_regions_to_dict(specific_regions_found)
+        return format_regions(specific_regions_found)
     
     # 구체적인 지역 명사가 없으면 포괄적인 키워드 검색
     else:
         print("-> 구체적인 지역이 없어 포괄 키워드를 검색합니다.")
         for keyword, provinces in EXCEPT_RULE_MAP.items():
             if keyword in user_query:
-                print(provinces, specific_regions_found)
-                return provinces
+                return [{"region_l1": province, "region_l2": ""} for province in provinces]
+    # 경상도 맛집을 추천해줘. 첫 여행이야
     
-    # 아무것도 찾지 못했을 경우
-    return None
-
-def format_regions_to_dict(region_list):
+def format_regions(region_list):
     province = None
     district = None
     for region in region_list:
@@ -108,9 +105,23 @@ def format_regions_to_dict(region_list):
 def update_region_keywords(query, state):
     prev_regions = state.get("region_keywords", [])
     new_regions = extract_region_from_query(query)
+    new_list = []
+    prev_list= []
+    for i in new_regions:
+        for a,b in i.items():
+            new_list.append(a)
+            new_list.append(b)
+    print(new_list)
+
+    for i in prev_regions:
+        for a,b in i.items():
+            prev_list.append(a)
+            prev_list.append(b)
+    print(prev_list)
+
     if new_regions:
     # 새 지역이 발견되면 업데이트
-        if set(new_regions) != set(prev_regions):
+        if set(new_list) != set(prev_list):
             state["region_keywords"] = new_regions
     # 새 지역이 없으면 그대로 유지
     return state
