@@ -11,37 +11,55 @@ client = OpenAI(api_key=os.getenv("API_KEY"))
 kiwi = Kiwi()
 
 # 지역 이름 불러오기
-file_path = "./data/korean_regions.txt"
+file_path = "./data/korean_regions.json"
 with open(file_path, 'r', encoding='utf-8') as f:
-    regions = [line.strip() for line in f if line.strip()]
+    regions = json.load(f)
+
+# 예외 매핑 룰
+except_mapping_rules = {
+    "전라도": {"전북", "전남", "광주"},
+    "경상도": {"경북", "경남", "부산", "대구", "울산"},
+    "충청도": {"충북", "충남", "대전", "세종"},
+    "수도권": {"경기", "인천"},
+    "서울 근교": {"경기", "인천"},
+    "경기도": {"경기", "인천"}
+}
 
 def extract_region_from_query(user_query, simple=True):
     """
     사용자 질문에서 LLM을 사용해 지역명 키워드 리스트를 추출합니다.
     """
     if simple:
-        print("[Keyword] 사용자 쿼리에서 지역명 키워드를 추출합니다...")
-        found_regions = set()
-
-        if "서울 근교" in user_query or "수도권" in user_query:
-            found_regions.update(["경기", "인천"])
-        if "경기도" in user_query:
-            found_regions.update(["경기", "인천"])
-        if "경상도" in user_query:
-            found_regions.update(["경북", "경남", "부산", "대구", "울산"])
-        if "전라도" in user_query:
-            found_regions.update(["전북", "전남", "광주"])
-        if "충청도" in user_query:
-            found_regions.update(["충북", "충남", "대전", "세종"])
-        
+        print("[Keyword] 사용자 쿼리에서 지역명 키워드를 추출합니다...")        
         query_nouns = [token.form for token in kiwi.tokenize(user_query) 
             if token.tag in ['NNG', 'NNP']]
         print(query_nouns)
-        for region in regions:
-            if region in query_nouns:
-                found_regions.add(region)
+        specific_regions = {region for region in regions if region in query_nouns}
+
+        # 2. '전라도', '경상도' 등 광역 키워드로 인해 추가될 대분류 지역을 찾습니다.
+        potential_broad_regions = set()
+        for broad_keyword, provinces in except_mapping_rules.items():
+            if broad_keyword in user_query:
+                potential_broad_regions.update(provinces)
+
+        # 3. 추출된 소분류 지역이 어떤 대분류에 속하는지 확인하여, 제외할 대분류를 결정합니다.
+        broad_regions_to_discard = set()
+        for region in specific_regions:
+            province = regions.get(region) # ex: '순천' -> '전남'
+            if not province:
+                continue
+
+            # 이 소분류(region)가 속한 대분류(province)가 광역 키워드로 인해 추가될 예정이었다면,
+            # 해당 광역 키워드에 해당하는 모든 대분류를 제외 목록에 추가합니다.
+            for broad_keyword, provinces_in_map in except_mapping_rules.items():
+                if province in provinces_in_map and broad_keyword in user_query:
+                    broad_regions_to_discard.update(provinces_in_map)
+                    
+        # 4. 최종 결과를 조합합니다.
+        # (추출된 모든 지역 + 광역 키워드 지역) - 제외할 광역 지역
+        final_regions = (specific_regions.union(potential_broad_regions)) - broad_regions_to_discard
         
-        return list(found_regions)
+        return list(final_regions)
     
     else:
         print("[LLM] 사용자 쿼리에서 지역명 키워드를 추출합니다...")
