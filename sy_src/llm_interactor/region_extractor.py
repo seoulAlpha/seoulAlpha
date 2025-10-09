@@ -83,6 +83,7 @@ def extract_region_from_query(user_query):
                 return [{"region_l1": province, "region_l2": ""} for province in provinces]
     # 경상도 맛집을 추천해줘. 첫 여행이야
     
+"""
 def format_regions(region_list):
     province = None
     district = None
@@ -101,6 +102,31 @@ def format_regions(region_list):
     if district:
         result_dict["region_l2"] = district
     return result_dict
+"""
+
+def format_regions(region_list):
+    province = None
+    district = None
+    processed_list = []
+    processed_list
+    for region in region_list:
+        result_dict = {}
+
+        if region.endswith(('구', '시', '군')):
+            if region in DISTRICT_TO_PROVINCE_MAP:
+                district = region
+                province = DISTRICT_TO_PROVINCE_MAP[region]
+        full_name = SHORT_TO_FULL_PROVINCE_NAME.get(region)
+        if full_name and full_name in PROVINCE_DISTRICT_MAP:
+            if province is None:
+                province = full_name
+        if province:
+            result_dict["region_l1"] = province
+        if district:
+            result_dict["region_l2"] = district
+        processed_list.append(result_dict)
+
+    return processed_list
 
 def update_region_keywords(query, state):
     prev_regions = state.get("region_keywords", [])
