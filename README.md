@@ -90,8 +90,8 @@ LLM의 **환각(Hallucination)** 문제를 해결하고 추천의 신뢰도를 �
 - **개발 언어**: Python
 - **주요 라이브러리**: OpenAI, Scikit-learn, Selenium
 - **모델**: `gpt-3.5-turbo` (LLM Agent), `jhgan/ko-sbert-nli` (한국어 자연어 이해 특화 모델)
+- **배포**: **[👉 demo 체험하기 (HuggingFace Space)](https://huggingface.co/spaces/seoulalpha/seoulalpha_space)**  
 - **데이터 소스**: 한국관광공사 외래관광객 조사 자료, 카카오맵
-
 ---
 
 ### 참고문헌
